@@ -18,22 +18,22 @@ steps:
 - task: CmdLine@2
   inputs:
     script: 'npm install'
-    workingDirectory: '$(agent.builddirectory)'
+    workingDirectory: '$(Build.SourcesDirectory)'
 
 - task: CmdLine@2
   inputs:
     script: 'npm run build'
-    workingDirectory: '$(agent.builddirectory)'
+    workingDirectory: '$(Build.SourcesDirectory)'
 
 - task: CmdLine@2
   inputs:
     script: 'npm test'
-    workingDirectory: '$(agent.builddirectory)'
+    workingDirectory: '$(Build.SourcesDirectory)'
 
 - task: CmdLine@2
   inputs:
     script: 'npm run dist'
-    workingDirectory: '$(agent.builddirectory)'
+    workingDirectory: '$(Build.SourcesDirectory)'
 
 - task: CopyFiles@2
   inputs:
