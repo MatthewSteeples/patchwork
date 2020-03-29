@@ -29,6 +29,8 @@ steps:
   inputs:
     script: 'npm run dist'
     workingDirectory: '$(Build.SourcesDirectory)'
+  env:
+    GH_TOKEN: $(GH_TOKEN)
 
 - task: CopyFiles@2
   inputs:
