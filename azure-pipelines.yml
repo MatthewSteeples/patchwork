@@ -22,6 +22,12 @@ steps:
     workingDirectory: '$(Build.SourcesDirectory)'
 
 - task: CmdLine@2
+  displayName: "NPM Install Electron Packager"
+  inputs:
+    script: 'npm install -g electron-packager'
+    workingDirectory: '$(Build.SourcesDirectory)'
+
+- task: CmdLine@2
   displayName: "NPM Install Windows Store"
   inputs:
     script: 'npm install -g electron-windows-store'
@@ -34,12 +40,17 @@ steps:
     workingDirectory: '$(Build.SourcesDirectory)'
 
 - task: CmdLine@2
-  displayName: "NPM Run Dist"
+  displayName: "Package"
   inputs:
-    script: 'npm run dist'
+    script: 'electron-packager ./'
     workingDirectory: '$(Build.SourcesDirectory)'
-  env:
-    GH_TOKEN: $(GH_TOKEN)
+
+- task: CmdLine@2
+  displayName: "Store"
+  inputs:
+    script: 'electron-windows-store --input-directory .\Patchwork-win32-x64 --output-directory .\Patchwork-win32-x64-store'
+    workingDirectory: '$(Build.SourcesDirectory)'
+
 
 - task: CopyFiles@2
   inputs:
