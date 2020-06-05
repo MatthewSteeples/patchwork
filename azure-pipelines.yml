@@ -16,16 +16,25 @@ steps:
   displayName: 'Install Node.js'
 
 - task: CmdLine@2
+  displayName: "NPM Install"
   inputs:
     script: 'npm install'
     workingDirectory: '$(Build.SourcesDirectory)'
 
 - task: CmdLine@2
+  displayName: "NPM Install Windows Store"
+  inputs:
+    script: 'npm install -g electron-windows-store'
+    workingDirectory: '$(Build.SourcesDirectory)'
+
+- task: CmdLine@2
+  displayName: "NPM Test"
   inputs:
     script: 'npm test'
     workingDirectory: '$(Build.SourcesDirectory)'
 
 - task: CmdLine@2
+  displayName: "NPM Run Dist"
   inputs:
     script: 'npm run dist'
     workingDirectory: '$(Build.SourcesDirectory)'
